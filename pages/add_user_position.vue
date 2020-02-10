@@ -11,14 +11,15 @@ export default {
     add_user() {
       navigator.geolocation.getCurrentPosition(success, err);
       function success(position) {
-        console.log(position);
+        db.collection("user_position").add({
+          user: "大悟",
+          latitude:position.coords.latitude,
+          longitude:position.coords.longitude
+        });
       }
       function err(e) {
         console.log(e);
       }
-      // db.collection('user_position').add({
-      //     user:"大悟"
-      // });
     }
   }
 };
