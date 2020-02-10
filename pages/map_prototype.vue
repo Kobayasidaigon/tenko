@@ -54,12 +54,13 @@ export default {
         const test = new google.maps.Marker({ position: uluru, map: map });
       }
     },
+    //ポリゴンを使った領域判定
     polygon() {
       var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
         center: { lat: 40.800471, lng: -73.958122 }
       });
-      var uluru = { lat: 40.800471, lng: -73.958122 };
+      var uluru = { lat: 50.800471, lng: -73.958122 };
       var polygon = new google.maps.Polygon({
         paths: this.paths,
         map: map,
@@ -68,7 +69,6 @@ export default {
         fillColor: "#FF0000",
         fillOpacity: 0.25
       });
-      const test_marker = new google.maps.Marker({ position: uluru, map: map });
       var marker_position = new google.maps.LatLng(uluru.lat, uluru.lng);
       var res = google.maps.geometry.poly.containsLocation(
         marker_position,
@@ -76,11 +76,37 @@ export default {
       );
       if (res) {
         var msg = "現在、指定された範囲内に入っています。";
+        const test_marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+          icon: {
+            fillColor: "#FFFFFF", //塗り潰し色
+            fillOpacity: 0.8, //塗り潰し透過率
+            path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW, //円を指定
+            scale: 16, //円のサイズ
+            strokeColor: "#000000", //枠の色
+            strokeWeight: 1.0 //枠の透過率
+          }
+        });
       } else {
         var msg = "現在は範囲外にいます。";
+        const test_marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+          icon: {
+            fillColor: "#000000", //塗り潰し色
+            fillOpacity: 0.8, //塗り潰し透過率
+            path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW, //円を指定
+            scale: 16, //円のサイズ
+            strokeColor: "#FFFFFF", //枠の色
+            strokeWeight: 1.0 //枠の透過率
+          }
+        });
+        
       }
       console.log(res);
     },
+    //firebaseからもらった情報でマーカー設置
     async get_position_from_firebase() {
       var infoWindow;
       var map = new google.maps.Map(
