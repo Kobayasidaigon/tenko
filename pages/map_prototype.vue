@@ -82,6 +82,7 @@ export default {
       console.log(res);
     },
     async get_position_from_firebase() {
+      var infoWindow;
       var map = new google.maps.Map(
         document.getElementById("map"),
         this.options
@@ -104,7 +105,16 @@ export default {
           lng: element.longitude
         };
         uluru = new google.maps.LatLng(uluru);
-        const test = new google.maps.Marker({ position: uluru, map: map });
+        const marker = new google.maps.Marker({ position: uluru, map: map });
+
+        infoWindow = new google.maps.InfoWindow({
+          // 吹き出しの追加
+          content: element.user // 吹き出しに表示する内容
+        });
+        marker.addListener("click", function() {
+          // マーカーをクリックしたとき
+          infoWindow.open(map, marker); // 吹き出しの表示
+        });
       });
     }
   }
