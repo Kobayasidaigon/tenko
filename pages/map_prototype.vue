@@ -4,10 +4,14 @@
     <v-btn @click="sample" >click</v-btn>
     <v-btn @click="pin_add">ピンを増やす</v-btn>
     <v-btn @click="polygon">ポリゴン</v-btn>
+    <v-btn @click="get_position_from_firebase">firebaseから取得</v-btn>
 </div>
 </template>
 <script>
+import firebase from "~/plugins/firebase.js";
+const db = firebase.firestore();
 var MyLatLng = new google.maps.LatLng(-25.344,131.036);
+
 export default{
     data:()=>({
         options:{
@@ -21,6 +25,7 @@ export default{
             {lat: 40.764543, lng: -73.973062},
             {lat: 40.768313, lng: -73.982233}
         ],
+        position_data:[]
     }),
     computed:{
         google(){
@@ -44,7 +49,7 @@ export default{
             }
     },
         polygon(){
-                var map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: {lat: 40.800471, lng: -73.958122}});
+            　var map = new google.maps.Map(document.getElementById('map'), {zoom: 10, center: {lat: 40.800471, lng: -73.958122}});
               var uluru = {lat: 40.800471, lng: -73.958122};
               var polygon = new google.maps.Polygon({
                 paths:this.paths,
@@ -63,6 +68,18 @@ export default{
                         var msg = "現在は範囲外にいます。"
                     }
               console.log(res)
+        },
+        get_position_from_firebase(){
+            const positionRef = db.collection('user_position');
+            const getDoc = positionRef.get().then((result) => {
+                result.forEach(element => {
+                    //console.log(element.data());
+                    this.position_data.push(element.data());
+                });
+            }).catch((err) => {
+                console.log(result);
+            });
+            console.log(this.position_data);
         }
     }
 }
