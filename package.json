@@ -11,7 +11,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/onesignal": "^3.0.0-beta.16",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "firebase": "^7.8.1",
     "nuxt": "^2.0.0",
+    "vue-router": "^3.1.5",
     "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {

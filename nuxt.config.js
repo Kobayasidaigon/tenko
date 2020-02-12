@@ -1,5 +1,8 @@
 import colors from "vuetify/es5/util/colors";
 
+require("dotenv").config();
+const google_map_api = process.env.google_map_api;
+const one_signal_api = process.env.one_signal_api;
 export default {
   mode: "spa",
   /*
@@ -17,7 +20,15 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [
+      {
+        src:
+          "https://maps.google.com/maps/api/js?key=" +
+          google_map_api +
+          "&libraries=places,geometry&language=ja"
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -38,7 +49,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/onesignal", "@nuxtjs/pwa"],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -81,5 +92,32 @@ export default {
       }
     }
   },
-  vendor: ["vue2-google-maps"]
+  vendor: ["vue2-google-maps"],
+  oneSignal: {
+    init: {
+      appId: one_signal_api,
+      allowLocalhostAsSecureOrigin: true, // localhostで動作確認する場合true
+      welcomeNotification: {
+        disable: true
+      }
+    },
+    importScripts: ["sw.js"] // 後述、必須
+  },
+  pwa: {
+    manifest: {
+      name: "test",
+      short_name: "test",
+      title: "test",
+      "og:title": "test",
+      description: "test",
+      "og:description": "test",
+      lang: "ja",
+      theme_color: "#ffffff",
+      background_color: "#ffffff"
+    }
+  },
+  env: {
+    google_map_api,
+    one_signal_api
+  }
 };
