@@ -6,12 +6,15 @@ import axios from "axios";
 export default {
   methods: {
     push() {
+      OneSignal.getUserId(userId => {
+        console.log(userId);
+      });
       const params = {
         method: "post",
         url: "https://onesignal.com/api/v1/notifications",
         headers: {
           "Content-Type": "application/json",
-          Authorization: ``
+          Authorization: `Basic `
         },
         data: {
           app_id: "",
@@ -23,13 +26,15 @@ export default {
             en: "This is notification test",
             ja: "name:hogeの人に通知です"
           },
+          include_player_ids: ["755eab06-8acd-4c3b-801b-3fdc2731e1a3"],
+
           // オプションフィルターなので任意ここでは
           filters: [
             {
               field: "tag",
-              key: "name",
-              relation: "!=",
-              value: "hoge"
+              key: "include_player_ids",
+              relation: "=",
+              value: "755eab06-8acd-4c3b-801b-3fdc2731e1a3"
             }
           ]
         }
