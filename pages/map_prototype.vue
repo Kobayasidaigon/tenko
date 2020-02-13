@@ -5,10 +5,13 @@
     <v-btn @click="pin_add">ピンを増やす</v-btn>
     <v-btn @click="polygon">ポリゴン</v-btn>
     <v-btn @click="get_position_from_firebase">firebaseから取得</v-btn>
+    <v-btn @click="child_call">子コンポーネント呼び出し</v-btn>
+    <push ref="push"></push>
   </div>
 </template>
 <script>
 import firebase from "~/plugins/firebase.js";
+import push from "../components/push.vue"
 const db = firebase.firestore();
 var MyLatLng = new google.maps.LatLng(-25.344, 131.036);
 
@@ -142,7 +145,13 @@ export default {
           infoWindow.open(map, marker); // 吹き出しの表示
         });
       });
+    },
+    child_call(){
+      this.$refs.push.push();
     }
+  },
+  components:{
+    push
   }
 };
 </script>

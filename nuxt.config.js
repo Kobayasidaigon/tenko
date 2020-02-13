@@ -49,7 +49,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/onesignal", "@nuxtjs/pwa"],
+  modules: [
+    "@nuxtjs/onesignal",
+    "@nuxtjs/pwa",
+    "@nuxtjs/axios",
+    "@nuxtjs/onesignal"
+  ],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
