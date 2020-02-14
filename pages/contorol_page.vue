@@ -22,18 +22,15 @@
       <v-list subheader>
         <v-subheader>Recent chat</v-subheader>
 
-        <v-list-item v-for="item in items" :key="item.title" >
+        <v-list-item v-for="item in this.user_list" :key="item.name" >
           <v-list-item-avatar>
             <v-img :src="item.avatar"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
+            <v-list-item-title v-text="item.user"></v-list-item-title>
           </v-list-item-content>
 
-          <v-list-item-icon>
-            <v-icon :color="item.active ? 'deep-purple accent-4' : 'grey'">chat_bubble</v-icon>
-          </v-list-item-icon>
         </v-list-item>
       </v-list>
 
@@ -86,7 +83,8 @@ export default {
         avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg"
       }
     ],
-    login_id: ""
+    login_id: "",
+    user_list:[]
   }),
   asyncData: context => ({
     login_id: context.query.login_id
@@ -94,10 +92,10 @@ export default {
   mounted() {
     db.collection("user_position").get().then((result) => {
       result.forEach(element => {
-        console.log(element.data());
-      });    
+        this.user_list.push(element.data());
+      });
     }).catch((err) => {
-      
+      console.log(err);
     });
   }
 };
