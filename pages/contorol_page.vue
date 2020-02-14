@@ -32,9 +32,12 @@
         </v-list-item>
       </v-list>
     </v-card>
+    <bottom_nav></bottom_nav>
   </v-col>
+  
 </template>
 <script>
+import bottom_nav from '~/components/bottom_nav.vue'
 import firebase from "~/plugins/firebase.js";
 const db = firebase.firestore();
 export default {
@@ -53,6 +56,9 @@ export default {
     }).catch((err) => {
       console.log(err);
     });
+  },
+  components:{
+    bottom_nav
   }
 };
 </script>
