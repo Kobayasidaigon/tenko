@@ -5,7 +5,9 @@
         <v-list-item three-line>
           <v-list-item-content>
             <div class="overline mb-4">group_id</div>
-            <v-list-item-title class="headline mb-1">{{login_id}}</v-list-item-title>
+            <v-list-item-title class="headline mb-1">{{
+              login_id
+            }}</v-list-item-title>
             <v-list-item-subtitle>サブタイトル</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -20,45 +22,51 @@
       </v-toolbar>
 
       <v-list subheader>
-        <v-list-item v-for="item in this.user_list" :key="item.name" >
+        <v-list-item v-for="item in this.user_list" :key="item.name">
           <v-list-item-avatar>
-            <img src='@/assets/human_icon.png'>
+            <img src="@/assets/human_icon.png" />
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title v-text="item.user"></v-list-item-title>
-          </v-list-item-content>
 
+            <pop ref="pop" @click="this.$ref.pop.chenge_dialog()"></pop>
+          </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-card>
     <bottom_nav></bottom_nav>
   </v-col>
-  
 </template>
 <script>
-import bottom_nav from '~/components/bottom_nav.vue'
+import bottom_nav from "~/components/bottom_nav.vue";
+import pop from "~/components/pop_up.vue";
 import firebase from "~/plugins/firebase.js";
 const db = firebase.firestore();
 export default {
   data: () => ({
     login_id: "",
-    user_list:[]
+    user_list: []
   }),
   asyncData: context => ({
     login_id: context.query.login_id
   }),
   mounted() {
-    db.collection("user_position").get().then((result) => {
-      result.forEach(element => {
-        this.user_list.push(element.data());
+    db.collection("user_position")
+      .get()
+      .then(result => {
+        result.forEach(element => {
+          this.user_list.push(element.data());
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-    }).catch((err) => {
-      console.log(err);
-    });
   },
-  components:{
-    bottom_nav
-  }
+  components: {
+    bottom_nav,
+    pop
+  },
+  methods: {}
 };
 </script>
