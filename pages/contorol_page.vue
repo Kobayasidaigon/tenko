@@ -22,7 +22,7 @@
       <v-list subheader>
         <v-list-item v-for="item in this.user_list" :key="item.name" >
           <v-list-item-avatar>
-            <v-img :src="item.avatar"></v-img>
+            <img src='@/assets/human_icon.png'>
           </v-list-item-avatar>
 
           <v-list-item-content>
