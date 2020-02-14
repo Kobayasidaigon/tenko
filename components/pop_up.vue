@@ -7,40 +7,40 @@
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
         <v-card-title class="headline"
-          >Use Google's location service?</v-card-title
+          >送信メッセージ</v-card-title
         >
 
-        <v-card-text>
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
-        </v-card-text>
-
+        <v-col cols="12" sm="6">
+          <v-text-field v-model="message" single-line solo ></v-text-field>
+        </v-col>
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn color="green darken-1" text @click="dialog = false">
-            Disagree
+          <v-btn color="green darken-1" text @click="dialog = false;send_messae()">
+            送信
           </v-btn>
 
-          <v-btn color="green darken-1" text @click="dialog = false">
-            Agree
-          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        dialog: false,
-      }
+export default {
+  data() {
+    return {
+      dialog: false,
+      message:''
+    };
+  },
+  methods: {
+    //親コンポーネントからmethods呼び出し
+    chenge_dialog() {
+      dialog != dialog;
     },
-    methods:{
-        chenge_dialog(){
-            dialog!=dialog;
-        }
+    send_messae(){
+        console.log(this.message);
     }
   }
+};
 </script>
