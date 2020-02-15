@@ -5,9 +5,11 @@
         <v-list-item three-line>
           <v-list-item-content>
             <div class="overline mb-4">group_id</div>
-            <v-list-item-title class="headline mb-1">{{
+            <v-list-item-title class="headline mb-1">
+              {{
               login_id
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
             <v-list-item-subtitle>サブタイトル</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -30,7 +32,7 @@
           <v-list-item-content>
             <v-list-item-title v-text="item.user"></v-list-item-title>
 
-            <pop ref="pop" @click="this.$ref.pop.chenge_dialog()"></pop>
+            <pop ref="pop" v-bind:id="item.OneSignal" @click="this.$ref.pop.chenge_dialog()"></pop>
           </v-list-item-content>
         </v-list-item>
       </v-list>
