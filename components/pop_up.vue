@@ -50,10 +50,10 @@ export default {
         url: "https://onesignal.com/api/v1/notifications",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Basic OTEwZGZmN2QtYTNiYS00NTE5LTg3OTYtZWRmNjk3NTkxY2Ni`
+          Authorization: ``
         },
         data: {
-          app_id: "1e9e3388-0b73-4114-bd73-1ad9c84edcf2",
+          app_id: "",
           headings: {
             en: "notification test",
             ja: "管理者からメッセージです"
