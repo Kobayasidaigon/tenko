@@ -44,15 +44,16 @@ export default {
       dialog != dialog;
     },
     send_messae() {
+      console.log(this.$props.id);
       const params = {
         method: "post",
         url: "https://onesignal.com/api/v1/notifications",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Basic `
+          Authorization: `Basic OTEwZGZmN2QtYTNiYS00NTE5LTg3OTYtZWRmNjk3NTkxY2Ni`
         },
         data: {
-          app_id: "",
+          app_id: "1e9e3388-0b73-4114-bd73-1ad9c84edcf2",
           headings: {
             en: "notification test",
             ja: "管理者からメッセージです"
@@ -61,17 +62,8 @@ export default {
             en: "This is notification test",
             ja: this.message
           },
-          include_player_ids: [this.$props.id],
-
-          // オプションフィルターなので任意ここでは
-          filters: [
-            {
-              field: "tag",
-              key: "include_player_ids",
-              relation: "=",
-              value: "755eab06-8acd-4c3b-801b-3fdc2731e1a3"
-            }
-          ]
+          //送信する相手の指定
+          include_player_ids: [this.$props.id]
         }
       };
       axios(params).then(res => {
